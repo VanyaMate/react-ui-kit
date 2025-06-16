@@ -1,0 +1,39 @@
+{
+    "name": "@vanyamate/react-ui-kit",
+    "private": false,
+    "version": "0.0.1",
+    "scripts": {
+        "build": "vite build --mode production",
+        "dev": "vite"
+    },
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "type": "module",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "types": "./dist/index.d.ts",
+            "require": "./dist/index.cjs"
+        }
+    },
+    "files": [
+        "dist",
+        "package.json",
+        "README.md"
+    ],
+    "devDependencies": {
+        "@types/react": "^19.1.8",
+        "@types/react-dom": "^19.1.6",
+        "@vitejs/plugin-react-swc": "^3.10.2",
+        "vite": "^6.3.5",
+        "vite-plugin-dts": "^4.5.4"
+    },
+    "dependencies": {
+        "@vanyamate/css-variables": "^0.0.6",
+        "classnames": "^2.5.1"
+    },
+    "peerDependencies": {
+        "react": "^19.1.0",
+        "react-dom": "^19.1.0"
+    }
+}

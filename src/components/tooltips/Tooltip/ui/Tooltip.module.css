@@ -1,0 +1,19 @@
+.container {
+    position      : fixed;
+    visibility    : hidden;
+    opacity       : 0;
+    display       : none;
+    padding       : var(--offset-small);
+    background    : var(--bg-main);
+    border        : 1px solid var(--border-color);
+    border-radius : var(--offset-small);
+
+    &.opened {
+        display : block;
+    }
+
+    &.visible {
+        visibility : visible;
+        opacity    : 1;
+    }
+}

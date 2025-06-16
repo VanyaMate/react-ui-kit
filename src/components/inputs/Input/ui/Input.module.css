@@ -1,0 +1,67 @@
+.container {
+    display       : inline-flex;
+    align-items   : center;
+    gap           : var(--input-padding);
+    background    : var(--bg-secondary);
+    border-radius : var(--input-radius);
+    height        : var(--input-height);
+    padding       : var(--input-padding);
+
+    &.active {
+        outline    : 1px solid var(--primary);
+        background : color-mix(in srgb, var(--bg-main), var(--bg-main-foreground) 5%);
+
+        &.noborder,
+        &.outline {
+            border-color : var(--primary);
+        }
+    }
+
+    .input {
+        width      : 100%;
+        border     : 1px solid transparent;
+        background : transparent;
+        outline    : none;
+    }
+
+    &.small {
+        --input-height  : var(--height-medium);
+        --input-padding : var(--offset-small);
+        --input-gap     : var(--offset-small);
+        --input-radius  : var(--offset-small);
+
+        input {
+            font-size : .8rem;
+        }
+    }
+
+    &.medium {
+        --input-height  : var(--height-x-large);
+        --input-padding : var(--offset-small);
+        --input-gap     : var(--offset-small);
+        --input-radius  : var(--offset-small);
+
+        input {
+            font-size : 1rem;
+        }
+    }
+
+    &.large {
+        --input-height  : var(--height-xxx-large);
+        --input-padding : var(--offset-small);
+        --input-gap     : var(--offset-medium);
+        --input-radius  : var(--offset-small);
+
+        input {
+            font-size : 1.2rem;
+        }
+    }
+
+    &.outline {
+        border : 1px solid var(--border-color);
+    }
+
+    &.noborder {
+        border : 1px solid var(--bg-secondary);
+    }
+}
