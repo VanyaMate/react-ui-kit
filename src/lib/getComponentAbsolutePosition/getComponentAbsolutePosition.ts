@@ -25,6 +25,7 @@ export type Horizontal =
     | 'center'
     | 'right';
 
+
 export const getComponentAbsolutePosition = function (
     parentPosition: Position,
     componentSize: Size,
@@ -40,44 +41,82 @@ export const getComponentAbsolutePosition = function (
     let width  = componentSize.x;
     let height = componentSize.y;
 
-    // ----- Vertical -----
-    const topPreferred    = parentPosition.top - componentSize.y - offset.y;
-    const bottomPreferred = parentPosition.top + parentPosition.height + offset.y;
+    // Горизонтальное позиционирование
 
-    const canPlaceTop    = topPreferred >= 0;
-    const canPlaceBottom = bottomPreferred + componentSize.y <= viewportHeight;
+    const tryLeft    = parentPosition.left - componentSize.x - offset.x;
+    const tryRight   = parentPosition.left + parentPosition.width + offset.x;
+    const tryCenterH = parentPosition.left + (parentPosition.width - componentSize.x) / 2;
 
-    if (verticalPrefer === 'top' && canPlaceTop) {
-        top = topPreferred;
-    } else if (verticalPrefer === 'bottom' && canPlaceBottom) {
-        top = bottomPreferred;
-    } else if (verticalPrefer === 'top' && canPlaceBottom) {
-        top = bottomPreferred;
-    } else if (verticalPrefer === 'bottom' && canPlaceTop) {
-        top = topPreferred;
+    const canLeftFit    = tryLeft >= 0;
+    const canRightFit   = tryRight + componentSize.x <= viewportWidth;
+    const canCenterHFit = tryCenterH >= 0 && tryCenterH + componentSize.x <= viewportWidth;
+
+    if (horizontalPrefer === 'left') {
+        if (canLeftFit) left = tryLeft;
+        else if (canRightFit) left = tryRight;
+        else if (canCenterHFit) left = tryCenterH;
+        else {
+            width = Math.min(componentSize.x, viewportWidth - offset.x * 2);
+            left  = offset.x + (viewportWidth - width) / 2;
+        }
+    } else if (horizontalPrefer === 'right') {
+        if (canRightFit) left = tryRight;
+        else if (canLeftFit) left = tryLeft;
+        else if (canCenterHFit) left = tryCenterH;
+        else {
+            width = Math.min(componentSize.x, viewportWidth - offset.x * 2);
+            left  = offset.x + (viewportWidth - width) / 2;
+        }
     } else {
-        height = Math.min(componentSize.y, viewportHeight - offset.y * 2);
-        top    = offset.y + (viewportHeight - height) / 2;
+        if (canCenterHFit) left = tryCenterH;
+        else if (canRightFit) left = tryRight;
+        else if (canLeftFit) left = tryLeft;
+        else {
+            width = Math.min(componentSize.x, viewportWidth - offset.x * 2);
+            left  = offset.x + (viewportWidth - width) / 2;
+        }
     }
 
-    // ----- Horizontal -----
-    const leftPreferred  = parentPosition.left - componentSize.x - offset.x;
-    const rightPreferred = parentPosition.left + parentPosition.width + offset.x;
+    // Вертикальное позиционирование
 
-    const canPlaceLeft  = leftPreferred >= 0;
-    const canPlaceRight = rightPreferred + componentSize.x <= viewportWidth;
+    const tryTop     = parentPosition.top - componentSize.y - offset.y;
+    const tryBottom  = parentPosition.top + parentPosition.height + offset.y;
+    const tryCenterV = parentPosition.top + (parentPosition.height - componentSize.y) / 2;
 
-    if (horizontalPrefer === 'left' && canPlaceLeft) {
-        left = leftPreferred;
-    } else if (horizontalPrefer === 'right' && canPlaceRight) {
-        left = rightPreferred;
-    } else if (horizontalPrefer === 'left' && canPlaceRight) {
-        left = rightPreferred;
-    } else if (horizontalPrefer === 'right' && canPlaceLeft) {
-        left = leftPreferred;
+    const canTopFit     = tryTop >= 0;
+    const canBottomFit  = tryBottom + componentSize.y <= viewportHeight;
+    const canCenterVFit = tryCenterV >= 0 && tryCenterV + componentSize.y <= viewportHeight;
+
+    const forceNonCenterVertical =
+              horizontalPrefer === 'center' ||
+              (!canLeftFit && !canRightFit);
+
+    const effectiveVerticalPrefer = forceNonCenterVertical && verticalPrefer === 'center'
+                                    ? 'top'
+                                    : verticalPrefer;
+
+    if (effectiveVerticalPrefer === 'top') {
+        if (canTopFit) top = tryTop;
+        else if (canBottomFit) top = tryBottom;
+        else {
+            height = Math.min(componentSize.y, viewportHeight - offset.y * 2);
+            top    = offset.y + (viewportHeight - height) / 2;
+        }
+    } else if (effectiveVerticalPrefer === 'bottom') {
+        if (canBottomFit) top = tryBottom;
+        else if (canTopFit) top = tryTop;
+        else {
+            height = Math.min(componentSize.y, viewportHeight - offset.y * 2);
+            top    = offset.y + (viewportHeight - height) / 2;
+        }
     } else {
-        width = Math.min(componentSize.x, viewportWidth - offset.x * 2);
-        left  = offset.x + (viewportWidth - width) / 2;
+        if (canCenterVFit) top = tryCenterV;
+        else if (canBottomFit) top = tryBottom;
+        else if (canTopFit) top = tryTop;
+        else {
+            height = Math.min(componentSize.y, viewportHeight - offset.y * 2);
+            top    = offset.y + (viewportHeight - height) / 2;
+        }
     }
 
     return {
