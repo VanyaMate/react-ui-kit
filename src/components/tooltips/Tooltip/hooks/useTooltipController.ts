@@ -1,7 +1,7 @@
 import {
     RefObject,
     useCallback,
-    useLayoutEffect,
+    useLayoutEffect, useMemo,
     useRef,
     useState,
 } from 'react';
@@ -73,12 +73,12 @@ export const useTooltipController = function (
         }
     }, [ opened ]);
 
-    return {
+    return useMemo(() => ({
         opened,
         visible,
         position,
         close,
         open,
         toggle,
-    };
+    }), [ opened, visible, position, close, open, toggle ]);
 };

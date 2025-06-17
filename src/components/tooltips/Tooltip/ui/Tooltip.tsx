@@ -42,6 +42,8 @@ export const Tooltip: FC<TooltipProps> = memo(function Tooltip (props) {
         return createPortal(
             <div
                 { ...other }
+                role={ 'tooltip' }
+                tabIndex={ -1 }
                 className={ classNames(css.container, {
                     [css.opened] : opened,
                     [css.visible]: visible,
