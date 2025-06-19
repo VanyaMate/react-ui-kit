@@ -1,14 +1,8 @@
-import {
-    type ComponentPropsWithRef,
-    type FC,
-    memo,
-} from 'react';
+import { IUseTooltipController } from 'index';
 import classNames from 'classnames';
-import css from './Tooltip.module.css';
-import {
-    IUseTooltipController,
-} from '@/components/tooltips/Tooltip/hooks/useTooltipController';
+import { ComponentPropsWithRef, FC, memo } from 'react';
 import { createPortal } from 'react-dom';
+import css from './Tooltip.module.css';
 
 
 export type TooltipVerticalPrefer =

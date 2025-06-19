@@ -1,5 +1,5 @@
-import { RefObject, useEffect } from 'react';
-import { isChildOf } from '@/components/tooltips/Tooltip/lib/isChildOf';
+import { type RefObject, useEffect } from 'react';
+import { isChildOf } from 'index';
 
 
 export const useHandlerOnClickOutside = function (addHandler: boolean, handler: () => void, targets: Array<RefObject<HTMLElement | null>>) {

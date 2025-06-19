@@ -1,7 +1,6 @@
 import { type ComponentPropsWithoutRef, type FC, memo, useMemo } from 'react';
-import { PreviewList } from '@/_dev_/ComponentsPreview/PreviewList';
-import { Button, Input, Tooltip } from '@/components';
-import { useTooltip } from '@/components/tooltips/Tooltip/hooks/useTooltip';
+import { PreviewList } from '../PreviewList';
+import { Button, Input, Tooltip, useTooltip } from 'index';
 
 
 export type InputPreviewProps =

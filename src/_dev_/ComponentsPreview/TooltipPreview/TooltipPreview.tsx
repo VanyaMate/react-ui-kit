@@ -1,7 +1,6 @@
 import { type FC, memo } from 'react';
-import { PreviewList } from '@/_dev_/ComponentsPreview/PreviewList';
-import { Button, Input, Tooltip } from '@/components';
-import { useTooltip } from '@/components/tooltips/Tooltip/hooks/useTooltip';
+import { Button, Input, Tooltip, useTooltip } from 'index';
+import { PreviewList } from '../PreviewList';
 
 
 export const TooltipPreview: FC = memo(function TooltipPreview () {

@@ -1,11 +1,11 @@
 import {
     type ComponentPropsWithoutRef,
     type FC,
-    memo, RefCallback, RefObject,
+    memo,
 } from 'react';
 import classNames from 'classnames';
 import css from './Checkbox.module.css';
-import { Ref } from '@/types';
+import { type Ref } from 'index';
 
 
 export type CheckboxSize =

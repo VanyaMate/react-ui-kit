@@ -1,5 +1,5 @@
 import {
-    ComponentPropsWithRef,
+    type ComponentPropsWithRef,
     type FC,
     memo,
 } from 'react';

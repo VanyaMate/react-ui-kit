@@ -11,9 +11,10 @@ export default defineConfig(({ mode }) => {
         plugins  : [
             react(),
             dtsPlugin({
-                outDir     : 'dist',
-                rollupTypes: true,
-                entryRoot  : 'src',
+                outDir      : 'dist',
+                rollupTypes : true,
+                entryRoot   : 'src',
+                copyDtsFiles: false,
             }),
             cssInjectedByJsPlugin(),
         ],
@@ -25,8 +26,11 @@ export default defineConfig(({ mode }) => {
         },
         resolve  : {
             alias: {
-                '@': '/src',
-                '$': '/',
+                '@components': './src/components',
+                '@lib'       : './src/lib',
+                '@types'     : './src/types',
+                '$'          : './',
+                'index'      : './src/index.ts',
             },
         },
         publicDir: 'public',

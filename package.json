@@ -1,7 +1,7 @@
 {
     "name": "@vanyamate/react-ui-kit",
     "private": false,
-    "version": "0.0.11",
+    "version": "0.0.12",
     "scripts": {
         "build": "vite build --mode production",
         "dev": "vite"

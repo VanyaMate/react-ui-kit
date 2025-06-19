@@ -1,4 +1,4 @@
-import { RefObject, useEffect } from 'react';
+import { type RefObject, useEffect } from 'react';
 
 
 export const useHandlerOnScroll = function (addHandler: boolean, handler: () => void, parentScroll?: RefObject<HTMLElement | null>) {

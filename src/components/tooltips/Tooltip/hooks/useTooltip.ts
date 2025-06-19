@@ -1,17 +1,12 @@
-import { RefObject, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
+import { type RefObject, useMemo, useRef } from 'react';
 import {
-    Horizontal, Offset, Vertical,
-} from '@/lib/getComponentAbsolutePosition';
-import { IUseTooltipController, useTooltipController } from '@/components';
-import {
-    useHandlerOnScroll,
-} from '@/components/tooltips/Tooltip/hooks/useHandlerOnScroll';
-import {
-    useHandlerOnKeyboardClose,
-} from '@/components/tooltips/Tooltip/hooks/useHandlerOnKeyboardClose';
-import {
+    IUseTooltipController,
     useHandlerOnClickOutside,
-} from '@/components/tooltips/Tooltip/hooks/useHandlerOnClickOutside';
+    useHandlerOnKeyboardClose,
+    useHandlerOnScroll,
+    useTooltipController,
+    Horizontal, Offset, Vertical,
+} from 'index';
 
 
 export type IUseTooltipControls = {

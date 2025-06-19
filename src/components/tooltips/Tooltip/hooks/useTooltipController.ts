@@ -1,13 +1,18 @@
 import {
-    RefObject,
+    type RefObject,
     useCallback,
-    useLayoutEffect, useMemo,
+    useLayoutEffect,
+    useMemo,
     useRef,
     useState,
 } from 'react';
 import {
-    getComponentAbsolutePosition, Horizontal, Offset, Position, Vertical,
-} from '@/lib/getComponentAbsolutePosition';
+    getComponentAbsolutePosition,
+    Horizontal,
+    Offset,
+    Position,
+    Vertical,
+} from 'index';
 
 
 export interface IUseTooltipController {

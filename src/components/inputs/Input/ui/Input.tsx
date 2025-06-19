@@ -1,11 +1,12 @@
 import {
     type ComponentPropsWithRef,
     type FC,
-    memo, ReactNode,
+    type ReactNode,
+    memo,
 } from 'react';
 import classNames from 'classnames';
 import css from './Input.module.css';
-import { Ref } from '@/types';
+import { type Ref } from 'index';
 
 
 export type InputSize =

@@ -1,6 +1,6 @@
 import { type ComponentPropsWithoutRef, type FC, memo } from 'react';
-import { PreviewList } from '@/_dev_/ComponentsPreview/PreviewList';
-import { Checkbox } from '@/components/inputs/Checkbox/ui/Checkbox';
+import { PreviewList } from '../PreviewList';
+import { Checkbox } from 'index';
 
 
 export type CheckboxPreviewProps =
