@@ -1,10 +1,11 @@
 import {
     type ComponentPropsWithRef,
-    type FC, FocusEventHandler,
-    memo, ReactNode, RefCallback, RefObject, useCallback, useState,
+    type FC,
+    memo, ReactNode,
 } from 'react';
 import classNames from 'classnames';
 import css from './Input.module.css';
+import { Ref } from '@/types';
 
 
 export type InputSize =
@@ -25,8 +26,8 @@ export type InputProps =
         size?: InputSize;
         variant?: InputVariant;
         inputClassName?: string;
-        ref?: RefCallback<HTMLInputElement | null> | RefObject<HTMLInputElement | null>;
-        labelRef?: RefCallback<HTMLLabelElement | null> | RefObject<HTMLLabelElement | null>;
+        ref?: Ref<HTMLInputElement>;
+        labelRef?: Ref<HTMLLabelElement>;
     }
     & Omit<ComponentPropsWithRef<'input'>, 'size' | 'ref'>;
 
@@ -40,23 +41,10 @@ export const Input: FC<InputProps> = memo(function Input (props) {
               extraPrefix,
               className,
               inputClassName,
-              onFocus,
-              onBlur,
               ref,
               labelRef,
               ...other
           } = props;
-
-    const [ active, setActive ] = useState(false);
-
-    const onFocusHandler: FocusEventHandler<HTMLInputElement> = useCallback((event) => {
-        setActive(true);
-        onFocus && onFocus(event);
-    }, [ onFocus ]);
-    const onBlurHandler: FocusEventHandler<HTMLInputElement>  = useCallback((event) => {
-        setActive(false);
-        onBlur && onBlur(event);
-    }, [ onBlur ]);
 
     return (
         <label
@@ -64,7 +52,6 @@ export const Input: FC<InputProps> = memo(function Input (props) {
             className={ classNames(css.container, {
                 [css[size]]   : true,
                 [css[variant]]: true,
-                [css.active]  : active,
                 [css.error]   : error,
                 [css.success] : success,
             }, [ className ]) }
@@ -74,8 +61,6 @@ export const Input: FC<InputProps> = memo(function Input (props) {
                 { ...other }
                 ref={ ref }
                 className={ classNames(css.input, {}, [ inputClassName ]) }
-                onFocus={ onFocusHandler }
-                onBlur={ onBlurHandler }
             />
             { extraPostfix }
         </label>

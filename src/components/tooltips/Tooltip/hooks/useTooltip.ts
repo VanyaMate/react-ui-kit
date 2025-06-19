@@ -1,7 +1,7 @@
 import { RefObject, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import {
     Horizontal, Offset, Vertical,
-} from '@/lib/getComponentAbsolutePosition/getComponentAbsolutePosition';
+} from '@/lib/getComponentAbsolutePosition';
 import { IUseTooltipController, useTooltipController } from '@/components';
 import {
     useHandlerOnScroll,

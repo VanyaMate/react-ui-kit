@@ -7,7 +7,7 @@ import {
 } from 'react';
 import {
     getComponentAbsolutePosition, Horizontal, Offset, Position, Vertical,
-} from '@/lib/getComponentAbsolutePosition/getComponentAbsolutePosition';
+} from '@/lib/getComponentAbsolutePosition';
 
 
 export interface IUseTooltipController {

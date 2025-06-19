@@ -11,7 +11,7 @@ export type InputPreviewProps =
 export const InputPreview: FC<InputPreviewProps> = memo(function InputPreview (props) {
     const { ...other } = props;
 
-    const offset = useMemo(() => ({
+    const offset                                     = useMemo(() => ({
         x: 0, y: 5,
     }), []);
     const [ trigger, tooltip, controller, controls ] = useTooltip<HTMLLabelElement>('top', 'left', offset);
@@ -58,7 +58,7 @@ export const InputPreview: FC<InputPreviewProps> = memo(function InputPreview (p
                 variant={ 'outline' }
                 size={ 'medium' }
                 placeholder={ 'email' }
-                ref={ trigger }
+                labelRef={ trigger }
                 success
                 extraPrefix={ <span
                     style={ { color: 'var(--success)' } }>[ok]</span> }
@@ -67,7 +67,7 @@ export const InputPreview: FC<InputPreviewProps> = memo(function InputPreview (p
                 variant={ 'outline' }
                 size={ 'medium' }
                 placeholder={ 'email' }
-                ref={ trigger }
+                labelRef={ trigger }
                 error
                 extraPrefix={ <span { ...controls.onHover }
                                     style={ { color: 'var(--danger)' } }>[error]</span> }

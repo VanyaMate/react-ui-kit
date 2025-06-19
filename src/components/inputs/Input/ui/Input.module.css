@@ -1,21 +1,27 @@
 .container {
-    --input-border-color : var(--border-color);
+    --input-outline-color : var(--primary);
+    --input-border-color  : var(--border-color);
 
-    display              : inline-flex;
-    align-items          : center;
-    gap                  : var(--input-padding);
-    background           : var(--bg-secondary);
-    border-radius        : var(--input-radius);
-    height               : var(--input-height);
-    padding              : var(--input-padding);
+    display               : inline-flex;
+    align-items           : center;
+    gap                   : var(--input-padding);
+    background            : var(--bg-secondary);
+    border-radius         : var(--input-radius);
+    height                : var(--input-height);
+    padding               : var(--input-padding);
 
-    &.active {
-        outline    : 1px solid var(--primary);
+    &:has(> input:focus) {
+        &:not(:is(.error, .success)) {
+            --input-border-color : var(--primary);
+            outline              : 1px solid var(--input-outline-color);
+        }
+
+        outline    : 2px solid var(--input-outline-color);
         background : color-mix(in srgb, var(--bg-main), var(--bg-main-foreground) 5%);
 
         &.noborder,
         &.outline {
-            border-color : var(--primary);
+            border-color : var(--input-border-color);
         }
     }
 
@@ -27,13 +33,15 @@
     }
 
     &.error {
-        --input-border-color : color-mix(in srgb, var(--border-color), var(--danger) 50%);
-        background           : color-mix(in srgb, var(--bg-secondary), var(--danger) 5%);
+        --input-border-color  : color-mix(in srgb, var(--border-color), var(--danger) 50%);
+        --input-outline-color : color-mix(in srgb, var(--border-color), var(--danger) 50%);
+        background            : color-mix(in srgb, var(--bg-secondary), var(--danger) 5%);
     }
 
     &.success {
-        --input-border-color : color-mix(in srgb, var(--border-color), var(--success) 50%);
-        background           : color-mix(in srgb, var(--bg-secondary), var(--success) 5%);
+        --input-border-color  : color-mix(in srgb, var(--border-color), var(--success) 50%);
+        --input-outline-color : color-mix(in srgb, var(--border-color), var(--success) 50%);
+        background            : color-mix(in srgb, var(--bg-secondary), var(--success) 5%);
     }
 
     &.small {

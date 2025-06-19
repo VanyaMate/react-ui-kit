@@ -16,7 +16,7 @@ export const CheckboxPreview: FC<CheckboxPreviewProps> = memo(function CheckboxP
             <Checkbox/>
             <Checkbox checked size={ 'small' }/>
             <Checkbox disabled size={ 'medium' }/>
-            <Checkbox disabled checked size={ 'large' }/>
+            <Checkbox checked disabled size={ 'large' }/>
         </PreviewList>
     );
 });

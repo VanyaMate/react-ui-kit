@@ -14,12 +14,16 @@
     user-select             : none;
     background              : var(--bg-secondary);
 
-    &.checked {
+    &:has(> input:checked) {
         --checkbox-border-color : var(--success);
         --checkbox-color        : var(--success);
         background              : color-mix(in srgb, var(--bg-main), var(--success) 10%);
 
-        &.focused {
+        &:before {
+            content : '✔';
+        }
+
+        &:has(> input:focus-visible) {
             outline : 1px solid var(--checkbox-border-color);
         }
 
@@ -28,8 +32,12 @@
         }
     }
 
-    &:not(.checked) {
-        &.focused {
+    &:not(:has(> input:checked)) {
+        &:before {
+            content : '⨉';
+        }
+
+        &:has(> input:focus-visible) {
             --checkbox-border-color : var(--bg-secondary-foreground);
             --checkbox-color        : var(--bg-secondary-foreground);
             background              : var(--bg-main);
@@ -65,13 +73,10 @@
         font-size       : 1.2rem;
     }
 
-    &.disabled {
-        &.checked,
-        &:not(.checked) {
-            pointer-events          : none;
-            opacity                 : .6;
-            --checkbox-border-color : var(--border-color);
-            --checkbox-color        : var(--ghost);
-        }
+    &:has(> input:disabled) {
+        pointer-events          : none;
+        opacity                 : .6;
+        --checkbox-border-color : var(--border-color);
+        --checkbox-color        : var(--ghost);
     }
 }
