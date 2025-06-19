@@ -11,6 +11,11 @@ import {
 import {
     TooltipPreview,
 } from '@/_dev_/ComponentsPreview/TooltipPreview/TooltipPreview';
+import {
+    CheckboxPreview,
+} from '@/_dev_/ComponentsPreview/CheckboxPreview/CheckboxPreview';
+import { Button, Tooltip } from '@/components';
+import { useTooltip } from '@/components/tooltips/Tooltip/hooks/useTooltip';
 
 
 export type ComponentsPreviewProps =
@@ -20,12 +25,74 @@ export type ComponentsPreviewProps =
 export const ComponentsPreview: FC<ComponentsPreviewProps> = memo(function ComponentsPreview (props) {
     const { className, ...other } = props;
 
+    const [ trigger, tooltip, controller, controls ] = useTooltip<HTMLButtonElement>('bottom', 'center', {
+        x: 10, y: 5,
+    });
+
     return (
-        <PreviewList { ...other }
-                     className={ classNames(css.container, {}, [ className ]) }>
-            <ButtonPreview/>
-            <InputPreview/>
-            <TooltipPreview/>
-        </PreviewList>
+        <div>
+            <header style={ {
+                display       : 'flex',
+                alignItems    : 'center',
+                justifyContent: 'space-between',
+                padding       : 10,
+            } }>
+                <h2>Biznes+</h2>
+                <ul style={ {
+                    display      : 'flex', alignItems: 'center', gap: 10,
+                    listStyleType: 'none',
+                } }>
+                    <li>
+                        <Button variant={ 'link' }>Решение</Button>
+                    </li>
+                    <li>
+                        <Button variant={ 'link' }>Цены</Button>
+                    </li>
+                    <li>
+                        <Button variant={ 'link' }>Контакты</Button>
+                    </li>
+                    <li>
+                        <Button variant={ 'outline' }
+                                kind={ 'icon' }>[m]</Button>
+                    </li>
+                    <li>
+                        <Button variant={ 'outline' }
+                                kind={ 'icon' }
+                                ref={ trigger }
+                                { ...controls.onClick }
+                        >[p]</Button>
+                        <Tooltip controller={ controller } ref={ tooltip }>
+                            <ul style={ {
+                                display      : 'flex',
+                                flexDirection: 'column',
+                                alignItems   : 'stretch',
+                                alignContent : 'stretch',
+                                gap          : 10,
+                                listStyleType: 'none',
+                            } }>
+                                <li>
+                                    <Button variant={ 'link' }>Профиль</Button>
+                                </li>
+                                <li>
+                                    <Button
+                                        variant={ 'link' }>Настройки</Button>
+                                </li>
+                                <li>
+                                    <Button variant={ 'danger' }>Выйти</Button>
+                                </li>
+                            </ul>
+                        </Tooltip>
+                    </li>
+                </ul>
+            </header>
+
+            <PreviewList { ...other }
+                         className={ classNames(css.container, {}, [ className ]) }>
+                <ButtonPreview/>
+                <InputPreview/>
+                <TooltipPreview/>
+                <CheckboxPreview/>
+            </PreviewList>
+        </div>
     );
 });

@@ -1,0 +1,77 @@
+.container {
+    --checkbox-border-color : var(--border-color);
+    --checkbox-color        : var(--ghost);
+
+    display                 : inline-flex;
+    border                  : 1px solid var(--checkbox-border-color);
+    color                   : var(--checkbox-color);
+    width                   : var(--checkbox-size);
+    min-width               : var(--checkbox-size);
+    height                  : var(--checkbox-size);
+    align-items             : center;
+    justify-content         : center;
+    border-radius           : var(--offset-small);
+    user-select             : none;
+    background              : var(--bg-secondary);
+
+    &.checked {
+        --checkbox-border-color : var(--success);
+        --checkbox-color        : var(--success);
+        background              : color-mix(in srgb, var(--bg-main), var(--success) 10%);
+
+        &.focused {
+            outline : 1px solid var(--checkbox-border-color);
+        }
+
+        &:hover {
+            background : var(--bg-main);
+        }
+    }
+
+    &:not(.checked) {
+        &.focused {
+            --checkbox-border-color : var(--bg-secondary-foreground);
+            --checkbox-color        : var(--bg-secondary-foreground);
+            background              : var(--bg-main);
+            outline                 : 1px solid var(--checkbox-border-color);
+        }
+
+        &:hover {
+            --checkbox-color : var(--bg-secondary-foreground);
+            background       : var(--bg-main);
+        }
+    }
+
+    .input {
+        opacity : 0;
+        border  : none;
+        outline : none;
+        width   : 0;
+        height  : 0;
+    }
+
+    &.small {
+        --checkbox-size : var(--height-x-small);
+        font-size       : .7rem;
+    }
+
+    &.medium {
+        --checkbox-size : var(--height-medium);
+        font-size       : 1rem;
+    }
+
+    &.large {
+        --checkbox-size : var(--height-x-large);
+        font-size       : 1.2rem;
+    }
+
+    &.disabled {
+        &.checked,
+        &:not(.checked) {
+            pointer-events          : none;
+            opacity                 : .6;
+            --checkbox-border-color : var(--border-color);
+            --checkbox-color        : var(--ghost);
+        }
+    }
+}

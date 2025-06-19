@@ -27,11 +27,13 @@
     }
 
     &.error {
-        --input-border-color : var(--danger);
+        --input-border-color : color-mix(in srgb, var(--border-color), var(--danger) 50%);
+        background           : color-mix(in srgb, var(--bg-secondary), var(--danger) 5%);
     }
 
     &.success {
-        --input-border-color : var(--success);
+        --input-border-color : color-mix(in srgb, var(--border-color), var(--success) 50%);
+        background           : color-mix(in srgb, var(--bg-secondary), var(--success) 5%);
     }
 
     &.small {

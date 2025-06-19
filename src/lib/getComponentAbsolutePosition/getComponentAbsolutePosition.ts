@@ -41,6 +41,8 @@ export const getComponentAbsolutePosition = function (
     let width  = componentSize.x;
     let height = componentSize.y;
 
+    const clamp = (val: number, min: number, max: number): number => Math.max(min, Math.min(val, max));
+
     const tryTop     = parentPosition.top - componentSize.y - offset.y;
     const tryBottom  = parentPosition.top + parentPosition.height + offset.y;
     const tryCenterV = parentPosition.top + (parentPosition.height - componentSize.y) / 2;
@@ -52,10 +54,6 @@ export const getComponentAbsolutePosition = function (
     const canTopFit     = tryTop >= 0;
     const canBottomFit  = tryBottom + componentSize.y <= viewportHeight;
     const canCenterVFit = tryCenterV >= 0 && tryCenterV + componentSize.y <= viewportHeight;
-
-    const canLeftFit    = tryLeftEdge >= 0;
-    const canRightFit   = tryRightEdge + componentSize.x <= viewportWidth;
-    const canCenterHFit = tryCenterH >= 0 && tryCenterH + componentSize.x <= viewportWidth;
 
     const isVerticalStacked = verticalPrefer !== 'center';
 
@@ -73,12 +71,7 @@ export const getComponentAbsolutePosition = function (
                 left  = offset.x + (viewportWidth - width) / 2;
             }
         } else {
-            if (canCenterHFit) {
-                left = tryCenterH;
-            } else {
-                width = Math.min(componentSize.x, viewportWidth - offset.x * 2);
-                left  = offset.x + (viewportWidth - width) / 2;
-            }
+            left = clamp(tryCenterH, offset.x, viewportWidth - componentSize.x - offset.x);
         }
     } else {
         const tryLeft  = parentPosition.left - componentSize.x - offset.x;
@@ -87,29 +80,19 @@ export const getComponentAbsolutePosition = function (
         if (horizontalPrefer === 'left') {
             if (tryLeft >= 0) left = tryLeft;
             else if (tryRight + componentSize.x <= viewportWidth) left = tryRight;
-            else {
-                width = Math.min(componentSize.x, viewportWidth - offset.x * 2);
-                left  = offset.x + (viewportWidth - width) / 2;
-            }
+            else left = clamp(tryCenterH, offset.x, viewportWidth - componentSize.x - offset.x);
         } else if (horizontalPrefer === 'right') {
             if (tryRight + componentSize.x <= viewportWidth) left = tryRight;
             else if (tryLeft >= 0) left = tryLeft;
-            else {
-                width = Math.min(componentSize.x, viewportWidth - offset.x * 2);
-                left  = offset.x + (viewportWidth - width) / 2;
-            }
+            else left = clamp(tryCenterH, offset.x, viewportWidth - componentSize.x - offset.x);
         } else {
-            if (canCenterHFit) left = tryCenterH;
-            else {
-                width = Math.min(componentSize.x, viewportWidth - offset.x * 2);
-                left  = offset.x + (viewportWidth - width) / 2;
-            }
+            left = clamp(tryCenterH, offset.x, viewportWidth - componentSize.x - offset.x);
         }
     }
 
     const forceNonCenterVertical =
               horizontalPrefer === 'center' ||
-              (!canLeftFit && !canRightFit);
+              (left < 0 || left + componentSize.x > viewportWidth);
 
     const effectiveVerticalPrefer =
               forceNonCenterVertical && verticalPrefer === 'center'

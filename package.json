@@ -1,7 +1,7 @@
 {
     "name": "@vanyamate/react-ui-kit",
     "private": false,
-    "version": "0.0.1",
+    "version": "0.0.2",
     "scripts": {
         "build": "vite build --mode production",
         "dev": "vite"
@@ -29,7 +29,7 @@
         "vite-plugin-dts": "^4.5.4"
     },
     "dependencies": {
-        "@vanyamate/css-variables": "^0.0.6",
+        "@vanyamate/css-variables": "^0.0.8",
         "classnames": "^2.5.1"
     },
     "peerDependencies": {

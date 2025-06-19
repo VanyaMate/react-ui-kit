@@ -1,7 +1,7 @@
 # React UI Kit
 
 - [ ] Button
-- [ ] PopOver
+- [ ] Tooltip
 - [ ] Input
 - [ ] Modal
 - [ ] Checkbox

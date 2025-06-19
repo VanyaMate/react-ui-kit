@@ -1,4 +1,4 @@
-import { type ComponentPropsWithoutRef, type FC, memo } from 'react';
+import { type ComponentPropsWithoutRef, type FC, memo, useMemo } from 'react';
 import { PreviewList } from '@/_dev_/ComponentsPreview/PreviewList';
 import { Button, Input, Tooltip } from '@/components';
 import { useTooltip } from '@/components/tooltips/Tooltip/hooks/useTooltip';
@@ -11,9 +11,10 @@ export type InputPreviewProps =
 export const InputPreview: FC<InputPreviewProps> = memo(function InputPreview (props) {
     const { ...other } = props;
 
-    const [ trigger, tooltip, controller, controls ] = useTooltip<HTMLLabelElement>('top', 'left', {
+    const offset = useMemo(() => ({
         x: 0, y: 5,
-    });
+    }), []);
+    const [ trigger, tooltip, controller, controls ] = useTooltip<HTMLLabelElement>('top', 'left', offset);
 
     return (
         <PreviewList { ...other }>

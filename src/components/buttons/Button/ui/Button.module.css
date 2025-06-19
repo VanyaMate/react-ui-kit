@@ -20,11 +20,11 @@
     }
 
     &:hover:not(:disabled) {
-        background : color-mix(in srgb, var(--button-bg-color), var(--bg-main) 10%);
+        background : color-mix(in srgb, var(--button-bg-color), var(--bg-main-foreground) 10%);
     }
 
     &:active:not(:disabled) {
-        background : color-mix(in srgb, var(--button-bg-color), var(--bg-main-foreground) 10%);
+        background : color-mix(in srgb, var(--button-bg-color), var(--bg-main) 10%);
     }
 
     &.icon {
