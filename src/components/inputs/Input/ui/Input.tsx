@@ -1,7 +1,7 @@
 import {
     type ComponentPropsWithRef,
     type FC, FocusEventHandler,
-    memo, ReactNode, RefObject, useCallback, useState,
+    memo, ReactNode, RefCallback, RefObject, useCallback, useState,
 } from 'react';
 import classNames from 'classnames';
 import css from './Input.module.css';
@@ -18,15 +18,15 @@ export type InputVariant =
 
 export type InputProps =
     {
-        error?: true;
-        success?: true;
+        error?: boolean;
+        success?: boolean;
         extraPostfix?: ReactNode;
         extraPrefix?: ReactNode;
         size?: InputSize;
         variant?: InputVariant;
         inputClassName?: string;
-        ref?: RefObject<HTMLLabelElement | null>;
-        inputRef?: RefObject<HTMLInputElement | null>;
+        ref?: RefCallback<HTMLInputElement | null> | RefObject<HTMLInputElement | null>;
+        labelRef?: RefCallback<HTMLLabelElement | null> | RefObject<HTMLLabelElement | null>;
     }
     & Omit<ComponentPropsWithRef<'input'>, 'size' | 'ref'>;
 
@@ -43,7 +43,7 @@ export const Input: FC<InputProps> = memo(function Input (props) {
               onFocus,
               onBlur,
               ref,
-              inputRef,
+              labelRef,
               ...other
           } = props;
 
@@ -60,7 +60,7 @@ export const Input: FC<InputProps> = memo(function Input (props) {
 
     return (
         <label
-            ref={ ref }
+            ref={ labelRef }
             className={ classNames(css.container, {
                 [css[size]]   : true,
                 [css[variant]]: true,
@@ -72,7 +72,7 @@ export const Input: FC<InputProps> = memo(function Input (props) {
             { extraPrefix }
             <input
                 { ...other }
-                ref={ inputRef }
+                ref={ ref }
                 className={ classNames(css.input, {}, [ inputClassName ]) }
                 onFocus={ onFocusHandler }
                 onBlur={ onBlurHandler }

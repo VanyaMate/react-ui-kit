@@ -1,2 +1,3 @@
 export * from './ui/Tooltip';
-export * from './hooks/useTooltipController';
+export * from './hooks';
+export * from './lib';

@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import dtsPlugin from 'vite-plugin-dts';
+import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
 
 
 export default defineConfig(({ mode }) => {
@@ -14,6 +15,7 @@ export default defineConfig(({ mode }) => {
                 rollupTypes: true,
                 entryRoot  : 'src',
             }),
+            cssInjectedByJsPlugin(),
         ],
         css      : {
             modules: {
