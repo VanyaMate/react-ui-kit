@@ -1,11 +1,13 @@
 .container {
-    display       : inline-flex;
-    align-items   : center;
-    gap           : var(--input-padding);
-    background    : var(--bg-secondary);
-    border-radius : var(--input-radius);
-    height        : var(--input-height);
-    padding       : var(--input-padding);
+    --input-border-color : var(--border-color);
+
+    display              : inline-flex;
+    align-items          : center;
+    gap                  : var(--input-padding);
+    background           : var(--bg-secondary);
+    border-radius        : var(--input-radius);
+    height               : var(--input-height);
+    padding              : var(--input-padding);
 
     &.active {
         outline    : 1px solid var(--primary);
@@ -22,6 +24,14 @@
         border     : 1px solid transparent;
         background : transparent;
         outline    : none;
+    }
+
+    &.error {
+        --input-border-color : var(--danger);
+    }
+
+    &.success {
+        --input-border-color : var(--success);
     }
 
     &.small {
@@ -58,7 +68,7 @@
     }
 
     &.outline {
-        border : 1px solid var(--border-color);
+        border : 1px solid var(--input-border-color);
     }
 
     &.noborder {

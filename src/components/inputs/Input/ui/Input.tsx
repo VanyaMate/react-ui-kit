@@ -1,7 +1,7 @@
 import {
-    type ComponentPropsWithoutRef,
+    type ComponentPropsWithRef,
     type FC, FocusEventHandler,
-    memo, ReactNode, useCallback, useState,
+    memo, ReactNode, RefObject, useCallback, useState,
 } from 'react';
 import classNames from 'classnames';
 import css from './Input.module.css';
@@ -25,8 +25,10 @@ export type InputProps =
         size?: InputSize;
         variant?: InputVariant;
         inputClassName?: string;
+        ref?: RefObject<HTMLLabelElement | null>;
+        inputRef?: RefObject<HTMLInputElement | null>;
     }
-    & Omit<ComponentPropsWithoutRef<'input'>, 'size'>;
+    & Omit<ComponentPropsWithRef<'input'>, 'size' | 'ref'>;
 
 export const Input: FC<InputProps> = memo(function Input (props) {
     const {
@@ -40,6 +42,8 @@ export const Input: FC<InputProps> = memo(function Input (props) {
               inputClassName,
               onFocus,
               onBlur,
+              ref,
+              inputRef,
               ...other
           } = props;
 
@@ -55,14 +59,20 @@ export const Input: FC<InputProps> = memo(function Input (props) {
     }, [ onBlur ]);
 
     return (
-        <label className={ classNames(css.container, {
-            [css[size]]   : true,
-            [css[variant]]: true,
-            [css.active]  : active,
-        }, [ className ]) }>
+        <label
+            ref={ ref }
+            className={ classNames(css.container, {
+                [css[size]]   : true,
+                [css[variant]]: true,
+                [css.active]  : active,
+                [css.error]   : error,
+                [css.success] : success,
+            }, [ className ]) }
+        >
             { extraPrefix }
             <input
                 { ...other }
+                ref={ inputRef }
                 className={ classNames(css.input, {}, [ inputClassName ]) }
                 onFocus={ onFocusHandler }
                 onBlur={ onBlurHandler }

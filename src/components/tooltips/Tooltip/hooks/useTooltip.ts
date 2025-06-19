@@ -41,8 +41,8 @@ export const useTooltip = function <TriggerType extends HTMLElement> (
     additionalParents?: Array<RefObject<HTMLElement | null>>,
     scrollParent?: RefObject<HTMLElement | null>,
 ): IUseTooltipRefs<TriggerType> {
-    const trigger    = useRef<TriggerType>(null);
-    const tooltip    = useRef<HTMLDivElement>(null);
+    const trigger    = useRef<TriggerType | null>(null);
+    const tooltip    = useRef<HTMLDivElement | null>(null);
     const controller = useTooltipController(trigger, tooltip, vertical, horizontal, offset);
 
     useHandlerOnScroll(controller.opened, controller.close, scrollParent);

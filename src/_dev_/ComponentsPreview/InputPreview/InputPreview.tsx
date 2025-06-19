@@ -1,6 +1,7 @@
 import { type ComponentPropsWithoutRef, type FC, memo } from 'react';
 import { PreviewList } from '@/_dev_/ComponentsPreview/PreviewList';
-import { Button, Input } from '@/components';
+import { Button, Input, Tooltip } from '@/components';
+import { useTooltip } from '@/components/tooltips/Tooltip/hooks/useTooltip';
 
 
 export type InputPreviewProps =
@@ -9,6 +10,10 @@ export type InputPreviewProps =
 
 export const InputPreview: FC<InputPreviewProps> = memo(function InputPreview (props) {
     const { ...other } = props;
+
+    const [ trigger, tooltip, controller, controls ] = useTooltip<HTMLLabelElement>('top', 'left', {
+        x: 0, y: 5,
+    });
 
     return (
         <PreviewList { ...other }>
@@ -48,6 +53,28 @@ export const InputPreview: FC<InputPreviewProps> = memo(function InputPreview (p
                     </Button>
                 }
             />
+            <Input
+                variant={ 'outline' }
+                size={ 'medium' }
+                placeholder={ 'email' }
+                ref={ trigger }
+                success
+                extraPrefix={ <span
+                    style={ { color: 'var(--success)' } }>[ok]</span> }
+            />
+            <Input
+                variant={ 'outline' }
+                size={ 'medium' }
+                placeholder={ 'email' }
+                ref={ trigger }
+                error
+                extraPrefix={ <span { ...controls.onHover }
+                                    style={ { color: 'var(--danger)' } }>[error]</span> }
+            />
+            <Tooltip controller={ controller } ref={ tooltip }
+                     style={ { borderColor: 'var(--danger)' } }>
+                <span style={ { color: 'var(--danger)' } }>Неправильный формат почты</span>
+            </Tooltip>
         </PreviewList>
     );
 });

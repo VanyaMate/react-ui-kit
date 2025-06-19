@@ -19,7 +19,8 @@ export const TooltipPreview: FC = memo(function TooltipPreview () {
             <Button ref={ trigger2 }
                     variant={ 'secondary' }
                     onClick={ controller2.toggle }>Privet</Button>
-            <Tooltip controller={ controller2 } ref={ tooltip2 }>
+            <Tooltip controller={ controller2 } ref={ tooltip2 }
+                     style={ { padding: 20 } }>
                 <h1>Tooltip</h1>
                 <Input placeholder={ 'EMail' }/>
                 <br/>
