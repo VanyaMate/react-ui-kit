@@ -6,7 +6,7 @@ import {
     useHandlerOnScroll,
     useTooltipController,
     Horizontal, Offset, Vertical,
-} from 'index';
+} from '@root';
 
 
 export type IUseTooltipControls = {
@@ -26,23 +26,40 @@ export type IUseTooltipRefs<TriggerType extends HTMLElement> = [
     controls: IUseTooltipControls,
 ]
 
-export const useTooltip = function <TriggerType extends HTMLElement> (
-    vertical: Vertical,
-    horizontal: Horizontal,
-    offset: Offset = {
-        x: 0,
-        y: 0,
-    },
-    additionalParents?: Array<RefObject<HTMLElement | null>>,
-    scrollParent?: RefObject<HTMLElement | null>,
-): IUseTooltipRefs<TriggerType> {
-    const trigger    = useRef<TriggerType | null>(null);
-    const tooltip    = useRef<HTMLDivElement | null>(null);
-    const controller = useTooltipController(trigger, tooltip, vertical, horizontal, offset);
+export type TooltipPosition = {
+    vertical?: Vertical;
+    horizontal?: Horizontal;
+    offset?: Offset;
+};
 
-    useHandlerOnScroll(controller.opened, controller.close, scrollParent);
+export type TooltipParents<ParentType extends HTMLElement> = {
+    parent?: RefObject<ParentType | null>;
+    additional?: Array<RefObject<HTMLElement | null>>,
+    scrolls?: Array<RefObject<HTMLElement | null>>,
+}
+
+export type TooltipProps<ParentType extends HTMLElement> = {
+    position?: TooltipPosition;
+    parents?: TooltipParents<ParentType>;
+}
+
+export const useTooltip = function <TriggerType extends HTMLElement> (props: TooltipProps<TriggerType> = {}): IUseTooltipRefs<TriggerType> {
+    const { position = {}, parents = {} } = props;
+    const {
+              vertical   = 'top',
+              offset     = { x: 0, y: 0 },
+              horizontal = 'center',
+          }                               = position;
+    const { parent, additional, scrolls } = parents;
+
+    const controllerParent = useRef<TriggerType | null>(null);
+    const tooltipParent    = useMemo(() => parent ?? controllerParent, []);
+    const tooltip          = useRef<HTMLDivElement | null>(null);
+    const controller       = useTooltipController(tooltipParent, tooltip, vertical, horizontal, offset);
+
+    useHandlerOnScroll(controller.opened, controller.close, scrolls);
     useHandlerOnKeyboardClose(controller.opened, controller.close);
-    useHandlerOnClickOutside(controller.opened, controller.close, [ tooltip, trigger, ...(additionalParents ?? []) ]);
+    useHandlerOnClickOutside(controller.opened, controller.close, [ tooltip, tooltipParent, ...(additional ?? []) ]);
 
     const controls = useMemo<IUseTooltipControls>(() => ({
         onHover: {
@@ -55,7 +72,7 @@ export const useTooltip = function <TriggerType extends HTMLElement> (
     }), []);
 
     return [
-        trigger,
+        controllerParent,
         tooltip,
         controller,
         controls,

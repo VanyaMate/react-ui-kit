@@ -1,16 +1,43 @@
 import { type FC, memo } from 'react';
-import { Button, Input, Tooltip, useTooltip } from 'index';
+import { Button, Input, Tooltip, useTooltip } from '@root';
 import { PreviewList } from '../PreviewList';
 
 
 export const TooltipPreview: FC = memo(function TooltipPreview () {
-    const [ trigger1, tooltip1, controller1 ]            = useTooltip<HTMLButtonElement>('center', 'left', {
-        x: 5, y: 5,
+    const [ trigger1, tooltip1, controller1 ]            = useTooltip<HTMLButtonElement>({
+        position: {
+            horizontal: 'right',
+            vertical  : 'center',
+            offset    : {
+                x: 5,
+                y: 5,
+            },
+        },
     });
-    const [ trigger3, tooltip3, controller3, controls3 ] = useTooltip<HTMLButtonElement>('center', 'right');
-    const [ trigger2, tooltip2, controller2 ]            = useTooltip<HTMLButtonElement>('bottom', 'center', undefined, [ tooltip3 ]);
-    const [ trigger4, tooltip4, controller4 ]            = useTooltip<HTMLButtonElement>('top', 'right', {
-        x: 5, y: 10,
+    const [ trigger3, tooltip3, controller3, controls3 ] = useTooltip<HTMLButtonElement>({
+        position: {
+            horizontal: 'right',
+            vertical  : 'center',
+        },
+    });
+    const [ trigger2, tooltip2, controller2 ]            = useTooltip<HTMLButtonElement>({
+        position: {
+            horizontal: 'right',
+            vertical  : 'bottom',
+        },
+        parents : {
+            additional: [ tooltip3 ],
+        },
+    });
+    const [ trigger4, tooltip4, controller4 ]            = useTooltip<HTMLButtonElement>({
+        position: {
+            horizontal: 'right',
+            vertical  : 'top',
+            offset    : {
+                x: 5,
+                y: 5,
+            },
+        },
     });
 
     return (

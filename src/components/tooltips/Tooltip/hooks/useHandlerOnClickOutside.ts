@@ -1,5 +1,5 @@
 import { type RefObject, useEffect } from 'react';
-import { isChildOf } from 'index';
+import { isChildOf } from '@root';
 
 
 export const useHandlerOnClickOutside = function (addHandler: boolean, handler: () => void, targets: Array<RefObject<HTMLElement | null>>) {

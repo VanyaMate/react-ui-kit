@@ -1,6 +1,17 @@
-import { type ComponentPropsWithoutRef, type FC, memo, useMemo } from 'react';
+import {
+    type ComponentPropsWithoutRef,
+    type FC,
+    memo,
+    useMemo,
+    useRef,
+} from 'react';
 import { PreviewList } from '../PreviewList';
-import { Button, Input, Tooltip, useTooltip } from 'index';
+import { Button, Icon, Input, Tooltip, useTooltip } from '@root';
+import { IoKey, IoLogoXbox, IoMail } from 'react-icons/io5';
+import {
+    TooltipIcon,
+} from '../../../components/icons/TooltipIcon/ui/TooltipIcon';
+import { P } from '../../../components/typography/P/ui/P';
 
 
 export type InputPreviewProps =
@@ -10,24 +21,31 @@ export type InputPreviewProps =
 export const InputPreview: FC<InputPreviewProps> = memo(function InputPreview (props) {
     const { ...other } = props;
 
-    const offset                                     = useMemo(() => ({
-        x: 0, y: 5,
-    }), []);
-    const [ trigger, tooltip, controller, controls ] = useTooltip<HTMLLabelElement>('top', 'left', offset);
+    const [ trigger, tooltip, controller, controls ] = useTooltip<HTMLLabelElement>();
+    const seartchRef                                 = useRef<HTMLLabelElement | null>(null);
 
     return (
         <PreviewList { ...other }>
             <h2>Inputs</h2>
             <Input/>
-            <Input placeholder={ 'placeholder' }/>
+            <Input
+                placeholder={ 'email' }
+                extraPrefix={ <Icon variant={ 'ghost' }
+                                    size={ 'small' }><IoMail/></Icon> }
+            />
             <Input
                 size="small"
-                placeholder={ 'placeholder' }
+                placeholder={ 'email' }
             />
             <Input
                 size="medium"
-                placeholder={ 'placeholder' }
-                extraPrefix={ <span>(x)</span> }
+                placeholder={ 'Password' }
+                type={ 'password' }
+                extraPrefix={
+                    <Icon variant={ 'ghost' }>
+                        <IoKey/>
+                    </Icon>
+                }
                 extraPostfix={
                     <Button
                         variant={ 'ghost' }
@@ -42,7 +60,17 @@ export const InputPreview: FC<InputPreviewProps> = memo(function InputPreview (p
                 variant={ 'noborder' }
                 size="large"
                 placeholder={ 'placeholder' }
-                extraPrefix={ <span>(x)</span> }
+                labelRef={ seartchRef }
+                extraPrefix={
+                    <TooltipIcon
+                        variant={ 'danger' }
+                        horizontal={ 'left' }
+                        content={ <P variant={ 'danger' }>Error message</P> }
+                        parent={ seartchRef }
+                    >
+                        <IoLogoXbox/>
+                    </TooltipIcon>
+                }
                 extraPostfix={
                     <Button
                         variant={ 'primary' }

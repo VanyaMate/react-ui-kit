@@ -1,12 +1,12 @@
 import { type ComponentPropsWithoutRef, type FC, memo } from 'react';
 import classNames from 'classnames';
 import css from './ComponentsPreview.module.css';
-import { Button, Tooltip, useTooltip } from 'index';
 import { PreviewList } from './PreviewList';
 import { ButtonPreview } from './ButtonPreview/ButtonPreview';
 import { InputPreview } from './InputPreview/InputPreview';
 import { TooltipPreview } from './TooltipPreview/TooltipPreview';
 import { CheckboxPreview } from './CheckboxPreview/CheckboxPreview';
+import { Button, Tooltip, useTooltip } from '@root';
 
 
 export type ComponentsPreviewProps =

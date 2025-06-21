@@ -1,0 +1,58 @@
+.container {
+    --icon-size     : var(--height-small);
+
+    display         : inline-flex;
+    align-items     : center;
+    justify-content : center;
+    width           : var(--icon-size);
+    max-width       : var(--icon-size);
+    min-width       : var(--icon-size);
+    height          : var(--icon-size);
+    max-height      : var(--icon-size);
+    min-height      : var(--icon-size);
+
+    & > * {
+        &:nth-child(1) {
+            display   : inline-block;
+            max-width : 100%;
+            min-width : 100%;
+            height    : 100%;
+        }
+
+        &:not(:nth-child(1)) {
+            display : none;
+        }
+    }
+
+    &.small {
+        --icon-size : var(--height-x-small);
+    }
+
+    &.medium {
+        --icon-size : var(--height-small);
+    }
+
+    &.large {
+        --icon-size : var(--height-medium);
+    }
+
+    &.default {
+        color : inherit;
+    }
+
+    &.success {
+        color : var(--success);
+    }
+
+    &.primary {
+        color : var(--primary);
+    }
+
+    &.danger {
+        color : var(--danger);
+    }
+
+    &.ghost {
+        color : var(--ghost);
+    }
+}

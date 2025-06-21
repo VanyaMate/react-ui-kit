@@ -1,6 +1,6 @@
 import { type ComponentPropsWithoutRef, type FC, memo } from 'react';
 import { PreviewList } from '../PreviewList';
-import { Button, ButtonSize, ButtonVariant } from 'index';
+import { Button, ButtonSize, ButtonVariant } from '@root';
 
 
 export type ButtonPreviewProps =

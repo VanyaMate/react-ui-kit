@@ -1,6 +1,6 @@
 import { type ComponentPropsWithoutRef, type FC, memo } from 'react';
 import { PreviewList } from '../PreviewList';
-import { Checkbox } from 'index';
+import { Checkbox } from '@root';
 
 
 export type CheckboxPreviewProps =
@@ -14,9 +14,9 @@ export const CheckboxPreview: FC<CheckboxPreviewProps> = memo(function CheckboxP
         <PreviewList { ...other }>
             <h2>Checkbox</h2>
             <Checkbox/>
-            <Checkbox checked size={ 'small' }/>
+            <Checkbox defaultChecked={ true } size={ 'small' }/>
             <Checkbox disabled size={ 'medium' }/>
-            <Checkbox checked disabled size={ 'large' }/>
+            <Checkbox disabled size={ 'large' }/>
         </PreviewList>
     );
 });

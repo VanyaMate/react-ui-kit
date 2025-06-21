@@ -2,11 +2,12 @@ import {
     type ComponentPropsWithRef,
     type FC,
     type ReactNode,
-    memo,
+    memo, useMemo, useState, HTMLInputTypeAttribute, useCallback,
 } from 'react';
 import classNames from 'classnames';
 import css from './Input.module.css';
-import { type Ref } from 'index';
+import { Button, Icon, type Ref } from '@root';
+import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 
 
 export type InputSize =
@@ -20,8 +21,8 @@ export type InputVariant =
 
 export type InputProps =
     {
-        error?: boolean;
-        success?: boolean;
+        error?: string | boolean;
+        success?: string | boolean;
         extraPostfix?: ReactNode;
         extraPrefix?: ReactNode;
         size?: InputSize;
@@ -44,8 +45,41 @@ export const Input: FC<InputProps> = memo(function Input (props) {
               inputClassName,
               ref,
               labelRef,
+              type    = 'text',
               ...other
           } = props;
+
+    const [ passwordOpened, setPasswordOpened ] = useState(false);
+    const [ currentType, setCurrentType ]       = useState<HTMLInputTypeAttribute>(type);
+    const isPasswordType                        = useMemo(() => type === 'password', [ type ]);
+    const togglePasswordVisible                 = useCallback(() => {
+        setPasswordOpened((prev) => !prev);
+        setCurrentType((prev) => prev === 'password' ? 'text' : 'password');
+    }, []);
+    const passwordOpenIcon                      = useMemo(() => (
+        isPasswordType
+        ? (
+            <Button
+                kind={ 'icon' }
+                size={ 'small' }
+                variant={ passwordOpened ? 'default' : 'ghost' }
+                onClick={ togglePasswordVisible }
+                aria-label={
+                    passwordOpened ? 'Скрыть пароль'
+                                   : `Показать пароль`
+                }
+            >
+                <Icon>
+                    {
+                        passwordOpened
+                        ? <IoMdEyeOff/>
+                        : <IoMdEye/>
+                    }
+                </Icon>
+            </Button>
+        )
+        : null
+    ), [ isPasswordType, passwordOpened ]);
 
     return (
         <label
@@ -61,8 +95,10 @@ export const Input: FC<InputProps> = memo(function Input (props) {
             <input
                 { ...other }
                 ref={ ref }
+                type={ currentType }
                 className={ classNames(css.input, {}, [ inputClassName ]) }
             />
+            { passwordOpenIcon }
             { extraPostfix }
         </label>
     );

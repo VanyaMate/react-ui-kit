@@ -20,7 +20,7 @@
             "@types": [
                 "./src/types"
             ],
-            "index": [
+            "@root": [
                 "./src/index.ts"
             ]
         }

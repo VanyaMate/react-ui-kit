@@ -26,11 +26,11 @@ export default defineConfig(({ mode }) => {
         },
         resolve  : {
             alias: {
-                '@components': './src/components',
-                '@lib'       : './src/lib',
-                '@types'     : './src/types',
-                '$'          : './',
-                'index'      : './src/index.ts',
+                '@components': '/src/components',
+                '@lib'       : '/src/lib',
+                '@types'     : '/src/types',
+                '$'          : '/',
+                '@root'      : '/src/index.ts',
             },
         },
         publicDir: 'public',

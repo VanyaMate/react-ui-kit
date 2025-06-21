@@ -5,7 +5,7 @@ import {
 } from 'react';
 import classNames from 'classnames';
 import css from './Checkbox.module.css';
-import { type Ref } from 'index';
+import { type Ref } from '@root';
 
 
 export type CheckboxSize =

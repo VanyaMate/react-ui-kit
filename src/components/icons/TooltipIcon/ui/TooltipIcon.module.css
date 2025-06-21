@@ -1,0 +1,11 @@
+.container {
+    border-color : var(--border-color);
+
+    &.danger {
+        border-color : var(--danger);
+    }
+
+    &.success {
+        border-color : var(--success);
+    }
+}

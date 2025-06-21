@@ -1,6 +1,6 @@
 import {
     type RefObject,
-    useCallback,
+    useCallback, useEffect,
     useLayoutEffect,
     useMemo,
     useRef,
@@ -12,7 +12,7 @@ import {
     Offset,
     Position,
     Vertical,
-} from 'index';
+} from '@root';
 
 
 export interface IUseTooltipController {
@@ -49,7 +49,7 @@ export const useTooltipController = function (
         setOpened((prev) => !prev);
     }, []);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         cancelAnimationFrame(raf.current);
         const parent  = parentRef.current;
         const tooltip = tooltipRef.current;

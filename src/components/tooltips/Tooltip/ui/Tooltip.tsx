@@ -1,4 +1,4 @@
-import { IUseTooltipController } from 'index';
+import { IUseTooltipController } from '@root';
 import classNames from 'classnames';
 import { ComponentPropsWithRef, FC, memo } from 'react';
 import { createPortal } from 'react-dom';
