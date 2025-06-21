@@ -12,6 +12,7 @@ import {
     TooltipIcon,
 } from '../../../components/icons/TooltipIcon/ui/TooltipIcon';
 import { P } from '../../../components/typography/P/ui/P';
+import { IconLoader } from '../../../components/icons/IconLoader/ui/IconLoader';
 
 
 export type InputPreviewProps =
@@ -42,8 +43,8 @@ export const InputPreview: FC<InputPreviewProps> = memo(function InputPreview (p
                 placeholder={ 'Password' }
                 type={ 'password' }
                 extraPrefix={
-                    <Icon variant={ 'ghost' }>
-                        <IoKey/>
+                    <Icon variant={ 'ghost' } size={ 'small' }>
+                        <IconLoader/>
                     </Icon>
                 }
                 extraPostfix={

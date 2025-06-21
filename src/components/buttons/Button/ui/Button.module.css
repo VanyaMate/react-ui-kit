@@ -12,6 +12,11 @@
     background      : var(--button-bg-color);
     color           : var(--button-bg-text-color);
 
+    & > * {
+        pointer-events : none;
+        user-select    : none;
+    }
+
     &:disabled {
         cursor     : not-allowed;
         background : var(--bg-secondary);
