@@ -16,8 +16,15 @@ export type ComponentsPreviewProps =
 export const ComponentsPreview: FC<ComponentsPreviewProps> = memo(function ComponentsPreview (props) {
     const { className, ...other } = props;
 
-    const [ trigger, tooltip, controller, controls ] = useTooltip<HTMLButtonElement>('bottom', 'center', {
-        x: 10, y: 5,
+    const [ trigger, tooltip, controller, controls ] = useTooltip<HTMLButtonElement>({
+        position: {
+            horizontal: 'right',
+            vertical  : 'bottom',
+            offset    : {
+                x: 5,
+                y: 5,
+            },
+        },
     });
 
     return (

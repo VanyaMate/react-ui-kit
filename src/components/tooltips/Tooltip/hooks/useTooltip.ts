@@ -9,7 +9,7 @@ import {
 } from '@root';
 
 
-export type IUseTooltipControls = {
+export type UseTooltipControls = {
     onHover: {
         onMouseEnter: () => void;
         onMouseLeave: () => void;
@@ -19,31 +19,31 @@ export type IUseTooltipControls = {
     },
 }
 
-export type IUseTooltipRefs<TriggerType extends HTMLElement> = [
+export type UseTooltipRefs<TriggerType extends HTMLElement> = [
     trigger: RefObject<TriggerType | null>,
     tooltip: RefObject<HTMLDivElement | null>,
     controller: IUseTooltipController,
-    controls: IUseTooltipControls,
+    controls: UseTooltipControls,
 ]
 
-export type TooltipPosition = {
+export type UseTooltipPosition = {
     vertical?: Vertical;
     horizontal?: Horizontal;
     offset?: Offset;
 };
 
-export type TooltipParents<ParentType extends HTMLElement> = {
+export type UseTooltipParents<ParentType extends HTMLElement> = {
     parent?: RefObject<ParentType | null>;
     additional?: Array<RefObject<HTMLElement | null>>,
     scrolls?: Array<RefObject<HTMLElement | null>>,
 }
 
-export type TooltipProps<ParentType extends HTMLElement> = {
-    position?: TooltipPosition;
-    parents?: TooltipParents<ParentType>;
+export type UseTooltipProps<ParentType extends HTMLElement> = {
+    position?: UseTooltipPosition;
+    parents?: UseTooltipParents<ParentType>;
 }
 
-export const useTooltip = function <TriggerType extends HTMLElement> (props: TooltipProps<TriggerType> = {}): IUseTooltipRefs<TriggerType> {
+export const useTooltip = function <TriggerType extends HTMLElement> (props: UseTooltipProps<TriggerType> = {}): UseTooltipRefs<TriggerType> {
     const { position = {}, parents = {} } = props;
     const {
               vertical   = 'top',
@@ -61,7 +61,7 @@ export const useTooltip = function <TriggerType extends HTMLElement> (props: Too
     useHandlerOnKeyboardClose(controller.opened, controller.close);
     useHandlerOnClickOutside(controller.opened, controller.close, [ tooltip, tooltipParent, ...(additional ?? []) ]);
 
-    const controls = useMemo<IUseTooltipControls>(() => ({
+    const controls = useMemo<UseTooltipControls>(() => ({
         onHover: {
             onMouseEnter: () => controller.open(),
             onMouseLeave: () => controller.close(),
