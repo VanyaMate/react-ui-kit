@@ -9,3 +9,5 @@
 - [ ] Toggle
 - [ ] Tab
 - [ ] Heading
+- [ ] Paragraph
+- [ ] Marked
