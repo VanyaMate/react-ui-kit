@@ -15,12 +15,10 @@ export type CardProps =
     & ComponentPropsWithoutRef<'article'>;
 
 export const Card: FC<CardProps> = memo(function Card (props) {
-    const { size = 'default', className, ...other } = props;
+    const { size = 'medium', className, ...other } = props;
 
     return (
-        <div { ...other }
-             className={ classNames(css.container, {}, [ className ]) }>
-            Card Component
-        </div>
+        <article { ...other }
+                 className={ classNames(css.container, { [css[size]]: true }, [ className ]) }/>
     );
 });
