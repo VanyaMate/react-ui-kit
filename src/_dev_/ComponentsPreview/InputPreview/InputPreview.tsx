@@ -2,12 +2,11 @@ import {
     type ComponentPropsWithoutRef,
     type FC,
     memo,
-    useMemo,
     useRef,
 } from 'react';
 import { PreviewList } from '../PreviewList';
 import { Button, Icon, Input, Tooltip, useTooltip } from '@root';
-import { IoKey, IoLogoXbox, IoMail } from 'react-icons/io5';
+import { IoLogoXbox, IoMail } from 'react-icons/io5';
 import {
     TooltipIcon,
 } from '../../../components/icons/TooltipIcon/ui/TooltipIcon';

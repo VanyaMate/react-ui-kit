@@ -1,0 +1,19 @@
+.container {
+    background : var(--bg-secondary);
+    border     : 1px solid var(--border-color);
+
+    &.small {
+        padding       : var(--offset-small);
+        border-radius : var(--offset-small);
+    }
+
+    &.medium {
+        padding       : var(--offset-medium);
+        border-radius : var(--offset-medium);
+    }
+
+    &.large {
+        padding       : var(--offset-large);
+        border-radius : var(--offset-large);
+    }
+}

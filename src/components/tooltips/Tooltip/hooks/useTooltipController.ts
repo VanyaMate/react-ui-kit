@@ -1,7 +1,7 @@
 import {
     type RefObject,
-    useCallback, useEffect,
-    useLayoutEffect,
+    useCallback,
+    useEffect,
     useMemo,
     useRef,
     useState,

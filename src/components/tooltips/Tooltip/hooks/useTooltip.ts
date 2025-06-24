@@ -5,7 +5,9 @@ import {
     useHandlerOnKeyboardClose,
     useHandlerOnScroll,
     useTooltipController,
-    Horizontal, Offset, Vertical,
+    Horizontal,
+    Offset,
+    Vertical,
 } from '@root';
 
 

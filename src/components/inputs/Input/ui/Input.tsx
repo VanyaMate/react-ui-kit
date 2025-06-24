@@ -60,6 +60,7 @@ export const Input: FC<InputProps> = memo(function Input (props) {
         isPasswordType
         ? (
             <Button
+                type={ 'button' }
                 kind={ 'icon' }
                 size={ 'small' }
                 variant={ passwordOpened ? 'default' : 'ghost' }
