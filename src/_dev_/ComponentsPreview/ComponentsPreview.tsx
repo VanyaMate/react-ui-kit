@@ -7,6 +7,7 @@ import { InputPreview } from './InputPreview/InputPreview';
 import { TooltipPreview } from './TooltipPreview/TooltipPreview';
 import { CheckboxPreview } from './CheckboxPreview/CheckboxPreview';
 import { Button, Card, Tooltip, useTooltip } from '@root';
+import { Heading } from '../../components/heading/Heading/ui/Heading';
 
 
 export type ComponentsPreviewProps =
@@ -84,7 +85,17 @@ export const ComponentsPreview: FC<ComponentsPreviewProps> = memo(function Compo
                 </ul>
             </header>
             <Card variant={ 'default' }>
-                '1 card'
+                <Heading
+                    content={
+                        <Card variant={ 'main' }>
+                            <Heading>
+                                '2 card'
+                            </Heading>
+                        </Card>
+                    }
+                >
+                    '1 card'
+                </Heading>
             </Card>
 
             <Card variant={ 'main' }>

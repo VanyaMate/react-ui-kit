@@ -1,0 +1,25 @@
+.container {
+    &:is(h1) {
+        font-size : 3rem;
+    }
+
+    &:is(h2) {
+        font-size : 2.5rem;
+    }
+
+    &:is(h3) {
+        font-size : 2rem;
+    }
+
+    &:is(h4) {
+        font-size : 1.5rem;
+    }
+
+    &:is(h5) {
+        font-size : 1rem;
+    }
+
+    &:is(h6) {
+        font-size : .8rem;
+    }
+}

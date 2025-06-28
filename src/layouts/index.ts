@@ -1,0 +1,1 @@
+export const __test__v: string = 'test';

@@ -21,7 +21,7 @@ export type CardProps =
         size?: CardSize,
         variant?: CardVariant,
     }
-    & ComponentPropsWithoutRef<'article'>;
+    & ComponentPropsWithoutRef<'div'>;
 
 export const Card: FC<CardProps> = memo(function Card (props) {
     const {
@@ -32,11 +32,11 @@ export const Card: FC<CardProps> = memo(function Card (props) {
           } = props;
 
     return (
-        <article { ...other }
-                 className={ classNames(css.container, {
-                     [css[size]]   : true,
-                     [css[variant]]: true,
-                 }, [ className ]) }
+        <div { ...other }
+             className={ classNames(css.container, {
+                 [css[size]]   : true,
+                 [css[variant]]: true,
+             }, [ className ]) }
         />
     );
 });
